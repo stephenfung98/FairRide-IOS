@@ -66,5 +66,10 @@
 	<string>FairRide</string>
 	<key>UberServerToken</key>
 	<string>Ti-eArOS3586hoeMM48iJS5erJgE0skKVEu5LyM8</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>uber</string>
+        <string>uberauth</string>
+    </array>
 </dict>
 </plist>

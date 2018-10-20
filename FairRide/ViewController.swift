@@ -21,6 +21,7 @@ class ViewController: UIViewController{
     @IBOutlet weak var dropOffLocationSearchBar: UISearchBar!
     
     static var dropOffLocation = ""
+    static var pickUpLocation = ""
     
     var locationManager = CLLocationManager()
     let completer = MKLocalSearchCompleter()
@@ -191,6 +192,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         switch activeTextView{
         case "top":
             pickUpLocationSearchBar.text = addresses[indexPath.row]
+            ViewController.pickUpLocation = addresses[indexPath.row].components(separatedBy: ",").first!
         default:
             dropOffLocationSearchBar.text = addresses[indexPath.row]
             ViewController.dropOffLocation = addresses[indexPath.row].components(separatedBy: ",").first!

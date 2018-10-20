@@ -9,6 +9,7 @@
 import UIKit
 import LyftSDK
 import CoreLocation
+import UberRides
 
 class DetailsViewController: UIViewController{
     
@@ -20,6 +21,7 @@ class DetailsViewController: UIViewController{
     
 //    @IBOutlet weak var btnLyft: LyftButton!
      let btnLyft = LyftButton()
+    let btnUber = RideRequestButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +36,39 @@ class DetailsViewController: UIViewController{
         surchageLabel.text = "\(PriceViewController.surcharge) times surcharge"
         
         //        let btnLyft = LyftButton()
-       
-
-        
-        
-        
-        
-        
-        
-        let pickup = ViewController.pickUpAnnotation.coordinate
-        let destination = ViewController.dropOffAnnotation.coordinate
-        btnLyft.configure(rideKind: PriceViewController.uberLyftArray[PriceViewController.buttonIndex].ride, pickup: pickup, destination: destination)
-
+    
+        if(!PriceViewController.uberLyftArray[PriceViewController.buttonIndex].isUber){
+            self.view.willRemoveSubview(btnUber)
+            
+            let pickup = ViewController.pickUpAnnotation.coordinate
+            let destination = ViewController.dropOffAnnotation.coordinate
+            btnLyft.configure(rideKind: PriceViewController.uberLyftArray[PriceViewController.buttonIndex].ride, pickup: pickup, destination: destination)
+            self.view.addSubview(btnLyft)
+            
+        }
+        else{
+            self.view.willRemoveSubview(btnLyft)
+            
+            // set a dropoffLocation
+            let pickUpLocation = CLLocation(latitude: ViewController.pickUpAnnotation.coordinate.latitude, longitude: ViewController.pickUpAnnotation.coordinate.longitude)
+            let dropoffLocation = CLLocation(latitude: ViewController.dropOffAnnotation.coordinate.latitude, longitude: ViewController.dropOffAnnotation.coordinate.longitude)
+            let builder = RideParametersBuilder()
+            builder.pickupLocation = pickUpLocation
+            builder.pickupNickname = ViewController.pickUpLocation
+            builder.dropoffLocation = dropoffLocation
+            builder.dropoffNickname = ViewController.dropOffLocation
+            btnUber.rideParameters = builder.build()
+            self.btnUber.loadRideInformation()
+            
+            //put the button in the view
+            view.addSubview(btnUber)
+        }
         
     }
+    
     override func viewDidLayoutSubviews() {
         btnLyft.frame = CGRect(x: self.view.center.x - 130, y: self.view.frame.size.height - 50 - view.safeAreaInsets.bottom, width: 260, height: 50)
-        
-        self.view.addSubview(btnLyft)
+        btnUber.frame = CGRect(x: self.view.center.x - 130, y: self.view.frame.size.height - 50 - view.safeAreaInsets.bottom, width: 260, height: 50)
     }
     
     
