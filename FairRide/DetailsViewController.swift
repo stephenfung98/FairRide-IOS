@@ -42,7 +42,7 @@ class DetailsViewController: UIViewController{
             
             let pickup = ViewController.pickUpAnnotation.coordinate
             let destination = ViewController.dropOffAnnotation.coordinate
-            btnLyft.configure(rideKind: PriceViewController.uberLyftArray[PriceViewController.buttonIndex].ride, pickup: pickup, destination: destination)
+            btnLyft.configure(rideKind: PriceViewController.uberLyftArray[PriceViewController.buttonIndex].LyftRideKind, pickup: pickup, destination: destination)
             self.view.addSubview(btnLyft)
             
         }
@@ -57,6 +57,7 @@ class DetailsViewController: UIViewController{
             builder.pickupNickname = ViewController.pickUpLocation
             builder.dropoffLocation = dropoffLocation
             builder.dropoffNickname = ViewController.dropOffLocation
+            builder.productID = PriceViewController.uberLyftArray[PriceViewController.buttonIndex].UberRideKind
             btnUber.rideParameters = builder.build()
             self.btnUber.loadRideInformation()
             
@@ -70,6 +71,5 @@ class DetailsViewController: UIViewController{
         btnLyft.frame = CGRect(x: self.view.center.x - 130, y: self.view.frame.size.height - 50 - view.safeAreaInsets.bottom, width: 260, height: 50)
         btnUber.frame = CGRect(x: self.view.center.x - 130, y: self.view.frame.size.height - 50 - view.safeAreaInsets.bottom, width: 260, height: 50)
     }
-    
     
 }

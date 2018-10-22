@@ -9,6 +9,7 @@
 import UIKit
 import UberRides
 import LyftSDK
+import UberCore
 
 class PriceViewController: UIViewController {
     
@@ -23,7 +24,8 @@ class PriceViewController: UIViewController {
         var maxCost = 0
         var closestRide = 0
         var surcharge = 0.0
-        var ride: LyftSDK.RideKind = LyftSDK.RideKind.Standard;
+        var LyftRideKind: LyftSDK.RideKind = LyftSDK.RideKind.Standard;
+        var UberRideKind: String = ""
     }
     
     var closestRideArray = [closestRide]()
@@ -69,8 +71,8 @@ class PriceViewController: UIViewController {
                 }
             }
             if(uber.lowEstimate != nil){
-                uber.productID
-                PriceViewController.uberLyftArray.append(uberLyftItem(isUber: true, rideName: uber.name!, minCost: uber.lowEstimate!, maxCost: uber.highEstimate!, closestRide: nearest, surcharge: uber.surgeMultiplier ?? 0.0, ride: LyftSDK.RideKind.Standard))
+                
+                PriceViewController.uberLyftArray.append(uberLyftItem(isUber: true, rideName: uber.name!, minCost: uber.lowEstimate!, maxCost: uber.highEstimate!, closestRide: nearest, surcharge: uber.surgeMultiplier ?? 0.0, LyftRideKind: LyftSDK.RideKind.Standard, UberRideKind: uber.productID!))
             }
         }
         
@@ -89,7 +91,7 @@ class PriceViewController: UIViewController {
                 }
             }
             
-            PriceViewController.uberLyftArray.append(uberLyftItem(isUber: false, rideName: lyft.displayName, minCost: Int((lyft.estimate?.minEstimate.amount.description)!)!, maxCost: Int((lyft.estimate?.maxEstimate.amount.description)!)!, closestRide: nearest, surcharge: Double(lyft.primeTimePercentageText) ?? 0, ride: lyft.rideKind))
+            PriceViewController.uberLyftArray.append(uberLyftItem(isUber: false, rideName: lyft.displayName, minCost: Int((lyft.estimate?.minEstimate.amount.description)!)!, maxCost: Int((lyft.estimate?.maxEstimate.amount.description)!)!, closestRide: nearest, surcharge: Double(lyft.primeTimePercentageText) ?? 0, LyftRideKind: lyft.rideKind, UberRideKind: "0"))
         }
         
 //        PriceViewController.uberLyftArray.sort { (lhs, rhs) -> Bool in
@@ -97,7 +99,7 @@ class PriceViewController: UIViewController {
 //        }
         
         for item in PriceViewController.uberLyftArray{
-            ridesButton[count].setTitle("$ \(item.minCost) - \(item.maxCost) \n\n\n\n\n \(item.closestRide) min", for: .normal)
+            ridesButton[count].setTitle("$\(item.minCost) - \(item.maxCost) \n\n\n\n\n \(item.closestRide) min", for: .normal)
             
             ridesButton[count].setImage(UIImage(named: item.rideName), for: .normal)
             ridesButton[count].titleEdgeInsets = UIEdgeInsets(top: 7, left: -124.3, bottom: 0, right: 0)
