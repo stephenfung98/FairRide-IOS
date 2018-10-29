@@ -59,30 +59,30 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PPI-Ui-qqo">
-                                <rect key="frame" x="0.0" y="200" width="414" height="660"/>
+                                <rect key="frame" x="0.0" y="200" width="375" height="315"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="1" id="cPH-FK-lKg">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cPH-FK-lKg" id="Hiz-rH-7wh">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="2" id="ONX-3v-QKp">
-                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ONX-3v-QKp" id="8aD-rp-6Yv">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="3" id="hfC-K4-inJ">
-                                        <rect key="frame" x="0.0" y="116" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hfC-K4-inJ" id="8dA-v4-vrK">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -97,8 +97,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="PPI-Ui-qqo" firstAttribute="leading" secondItem="qVg-x6-hPG" secondAttribute="leading" id="0Hk-Kd-gpi"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="PPI-Ui-qqo" secondAttribute="bottom" constant="-82" id="7dK-pS-hoD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PPI-Ui-qqo" secondAttribute="trailing" constant="-55" id="7li-dv-OuL"/>
+                            <constraint firstItem="PPI-Ui-qqo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="13m-EC-WiD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PPI-Ui-qqo" secondAttribute="trailing" id="4Y7-Vg-QZ4"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="PPI-Ui-qqo" secondAttribute="bottom" constant="263" id="7dK-pS-hoD"/>
                             <constraint firstItem="x3V-lp-1ii" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="L03-hq-ptH"/>
                             <constraint firstAttribute="bottom" secondItem="x3V-lp-1ii" secondAttribute="bottom" id="NXM-SG-dvg"/>
                             <constraint firstItem="x3V-lp-1ii" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OYP-Nb-Ug8"/>
@@ -125,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2063" y="550"/>
+            <point key="canvasLocation" x="2061.5999999999999" y="549.7536945812808"/>
         </scene>
         <!--FairRide-->
         <scene sceneID="fQ6-Co-vbC">
@@ -535,11 +536,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FairRideBanner" width="666" height="320"/>
-        <image name="Money" width="68" height="68"/>
+        <image name="FairRideBanner" width="2000" height="960"/>
+        <image name="Money" width="206" height="206"/>
         <image name="PriceViewControllerBackground" width="936" height="1664"/>
-        <image name="Surchage" width="68" height="68"/>
-        <image name="Time" width="68" height="68"/>
+        <image name="Surchage" width="206" height="206"/>
+        <image name="Time" width="206" height="206"/>
         <image name="gsf" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>

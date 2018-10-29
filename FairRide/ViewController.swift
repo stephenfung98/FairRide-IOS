@@ -328,11 +328,20 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ViewController: MKLocalSearchCompleterDelegate {
-    //TODO: Remove nearby locations - ex: IKEA, Search Nearby
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         addresses = completer.results.map { result in
             result.title + ", " + result.subtitle
         }
+        // Mark: Removes addresses that contain "Search Nearby"
+            for i in (0..<addresses.count).reversed(){
+                if addresses.count-1 > i {
+                    if addresses[i].range(of:"Search Nearby") != nil {
+                        print(addresses[i])
+                        addresses.remove(at: i)
+                    }
+                }
+            }
+        
         // use addresses, e.g. update model and call `tableView.reloadData()
         locationResultTableView.reloadData();
     }
