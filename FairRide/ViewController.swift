@@ -26,8 +26,9 @@ class ViewController: UIViewController{
     var locationManager = CLLocationManager()
     let completer = MKLocalSearchCompleter()
     var addresses = [String]()
-    //TODO: DONT KEEP IT STATIC - just for testing purposes
-    static var pickUpLocationSet = false
+    var pickUpLocationSet = false
+    
+    var tableViewSizeSet = false
     
     static var distance = 0.0
     static var travelTime = 0
@@ -71,8 +72,22 @@ class ViewController: UIViewController{
         }
         mapView.delegate = self
         locationResultTableView.isHidden = true;
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        print("showing")
+        if(!tableViewSizeSet){
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                locationResultTableView.frame = CGRect(x: locationResultTableView.frame.origin.x, y: locationResultTableView.frame.origin.y, width: locationResultTableView.frame.width, height: locationResultTableView.frame.height - keyboardSize.height)
+            }
+        }
+        tableViewSizeSet = true
+    }
+    
 }
+
 
 
 extension ViewController: MKMapViewDelegate{
@@ -87,16 +102,16 @@ extension ViewController: MKMapViewDelegate{
 
 extension ViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if(!ViewController.pickUpLocationSet){
-            ViewController.pickUpLocationSet = true
+        if(!pickUpLocationSet){
+            pickUpLocationSet = true
             if let location = locations.last{
                 let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))
+                let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
                 self.mapView.setRegion(region, animated: true)
                 
                 getAddressFromLatLong(latLongCords: location)
                 //                let priceViewController = PriceViewController();
-                print("pickUpLocationSet")
+                //                print("pickUpLocationSet")
                 
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = center
@@ -138,7 +153,7 @@ extension ViewController: UISearchBarDelegate{
                 if pm.locality != nil {
                     addressString = addressString + pm.locality! + ""
                 }
-                print(addressString)
+                //                print(addressString)
                 self.pickUpLocationSearchBar.text = addressString
             }
         })
@@ -199,7 +214,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         locationResultTableView.isHidden = true
         view.endEditing(true)
-        
         
         
         //MARK: Change address to lat long
@@ -289,7 +303,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 ViewController.walkingTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
             }
-           
+            
             
             self.uberRidesClient.fetchTimeEstimates(pickupLocation: CLLocation(latitude: ViewController.pickUpAnnotation.coordinate.latitude, longitude: ViewController.pickUpAnnotation.coordinate.longitude), completion: { product, response in
                 ViewController.uberTimes = product
@@ -322,7 +336,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                     ViewController.lyftTimes = []
                 }
             })
-            
         }
     }
 }
@@ -333,15 +346,14 @@ extension ViewController: MKLocalSearchCompleterDelegate {
             result.title + ", " + result.subtitle
         }
         // Mark: Removes addresses that contain "Search Nearby"
-            for i in (0..<addresses.count).reversed(){
-                if addresses.count-1 > i {
-                    if addresses[i].range(of:"Search Nearby") != nil {
-                        print(addresses[i])
-                        addresses.remove(at: i)
-                    }
+        for i in (0..<addresses.count).reversed(){
+            if addresses.count-1 > i {
+                if addresses[i].range(of:"Search Nearby") != nil {
+                    //                        print(addresses[i])
+                    addresses.remove(at: i)
                 }
             }
-        
+        }
         // use addresses, e.g. update model and call `tableView.reloadData()
         locationResultTableView.reloadData();
     }

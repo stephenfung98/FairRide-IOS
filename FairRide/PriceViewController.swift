@@ -61,7 +61,6 @@ class PriceViewController: UIViewController {
             closestRideArray.append(closestRide(rideType: uber.name!, minutes: uber.estimate! / 60))
         }
         
-        
         for uber in ViewController.uberPrices{
             var nearest = 0
             for ride in closestRideArray{

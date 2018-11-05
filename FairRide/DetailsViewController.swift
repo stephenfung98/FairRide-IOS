@@ -26,16 +26,11 @@ class DetailsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        banner.image = UIImage(named: "FairRideBanner")
-        
-        //TODO: Fix label for closest ride label, always displays "to John F Kenedy Airport
         closestRideLabel.text = "\(PriceViewController.time) minutes to closest ride"
         destinationLabel.text = "to \(ViewController.dropOffLocation)"
         destinationLabel.sizeToFit()
         costLabel.text = "$\(PriceViewController.cost[0]) - \(PriceViewController.cost[1]) estimated fare"
         surchageLabel.text = "\(PriceViewController.surcharge) times surcharge"
-        
-        //        let btnLyft = LyftButton()
     
         if(!PriceViewController.uberLyftArray[PriceViewController.buttonIndex].isUber){
             self.view.willRemoveSubview(btnUber)
