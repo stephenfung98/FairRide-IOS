@@ -6,12 +6,12 @@
 //  Copyright © 2018 Stephen Fung. All rights reserved.
 //
 
-import UIKit
 import MapKit
-import CoreLocation
-import UberCore
 import UberRides
 import LyftSDK
+//import CoreLocation
+//import UberCore
+//import UIKit
 
 class ViewController: UIViewController{
     
@@ -27,13 +27,12 @@ class ViewController: UIViewController{
     let completer = MKLocalSearchCompleter()
     var addresses = [String]()
     var pickUpLocationSet = false
-    
     var tableViewSizeSet = false
     
     static var distance = 0.0
     static var travelTime = 0
-    static var publicTransportationTravelTime: Int?
-    static var walkingTravelTime: Int?
+//    static var publicTransportationTravelTime: Int?
+//    static var walkingTravelTime: Int?
     static var uberPrices: [PriceEstimate] = []
     static var uberTimes: [TimeEstimate] = []
     static var lyftPrices: [Cost] = []
@@ -45,20 +44,11 @@ class ViewController: UIViewController{
     static var pickUpAnnotation = MKPointAnnotation()
     static var dropOffAnnotation = MKPointAnnotation()
     var polyLine = MKPolyline()
-    
     let uberRidesClient = RidesClient()
     
-    let activityIndecatior:UIActivityIndicatorView = UIActivityIndicatorView()
     @IBAction func compareButton(_ sender: Any) {
-        while !dataRetrived[0]{
+        while !dataRetrived[0] && !dataRetrived[1] && !dataRetrived[2] && !dataRetrived[3]{
         }
-        while !dataRetrived[1]{
-        }
-        while !dataRetrived[2]{
-        }
-        while !dataRetrived[3]{
-        }
-        //        activityIndecatior.stopAnimating()
     }
     
     override func viewDidLoad() {
@@ -85,7 +75,6 @@ class ViewController: UIViewController{
         }
         tableViewSizeSet = true
     }
-    
 }
 
 
@@ -108,11 +97,7 @@ extension ViewController: CLLocationManagerDelegate{
                 let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                 let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
                 self.mapView.setRegion(region, animated: true)
-                
                 getAddressFromLatLong(latLongCords: location)
-                //                let priceViewController = PriceViewController();
-                //                print("pickUpLocationSet")
-                
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = center
                 ViewController.pickUpAnnotation = annotation
@@ -126,20 +111,13 @@ extension ViewController: CLLocationManagerDelegate{
 extension ViewController: UISearchBarDelegate{
     func getAddressFromLatLong(latLongCords: CLLocation){
         CLGeocoder().reverseGeocodeLocation(latLongCords, completionHandler: {(placemarks, error) -> Void in
-            if (error != nil)
-            {
+            if (error != nil){
                 print("reverse geodcode fail: \(error!.localizedDescription)")
             }
             let pm = placemarks! as [CLPlacemark]
             
             if pm.count > 0 {
                 let pm = placemarks![0]
-                //                    print(pm.country)
-                //                    print(pm.locality)
-                //                    print(pm.subLocality)
-                //                    print(pm.thoroughfare)
-                //                    print(pm.postalCode)
-                //                    print(pm.subThoroughfare)
                 var addressString : String = ""
                 if pm.subThoroughfare != nil {
                     addressString = addressString + pm.subThoroughfare! + " "
@@ -174,20 +152,19 @@ extension ViewController: UISearchBarDelegate{
         }
         return true
     }
+    
     //MARK: called when search button on keyboard is clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         view.endEditing(true)
-        locationResultTableView.isHidden = true;
+        locationResultTableView.isHidden = true
     }
+    
     //MARK: called when text changes (including clear)
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         completer.queryFragment = searchText
         completerDidUpdateResults(completer)
     }
 }
-
-
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -198,12 +175,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         // Default cell
         let cell = UITableViewCell()
         cell.textLabel!.text = addresses[indexPath.row]
-        return cell;
+        return cell
     }
     
     //MARK: called when a location is clicked on tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(addresses[indexPath.row])
         switch activeTextView{
         case "top":
             pickUpLocationSearchBar.text = addresses[indexPath.row]
@@ -214,7 +190,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         locationResultTableView.isHidden = true
         view.endEditing(true)
-        
         
         //MARK: Change address to lat long
         let geoCoder = CLGeocoder()
@@ -230,7 +205,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             //handles location found
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             _ = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015))
-            //            self.mapView.setRegion(region, animated: true)
             
             //MARK: Pickup/drop off annotations
             let annotation = MKPointAnnotation()
@@ -246,7 +220,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 annotation.title = "Drop off Location"
             }
             self.dataRetrived = [false,false,false,false]
-            
             self.mapView.addAnnotation(annotation)
             
             //MARK: Handles direction line
@@ -288,7 +261,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                     }
                     return
                 }
-                ViewController.publicTransportationTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
+//                ViewController.publicTransportationTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
+                print("public transportation time: ", Int(round(response.expectedTravelTime / 60)))
             }
             //MARK: Calculate the directons for Public Trasportation
             directionRequest.transportType = .walking
@@ -301,7 +275,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                     }
                     return
                 }
-                ViewController.walkingTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
+//                ViewController.walkingTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
+                print("walking time: ", Int(round(response.expectedTravelTime / 60)))
             }
             
             
@@ -310,7 +285,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 self.dataRetrived[0] = true
                 
             })
-            
             self.uberRidesClient.fetchPriceEstimates(pickupLocation: CLLocation(latitude: ViewController.pickUpAnnotation.coordinate.latitude, longitude: ViewController.pickUpAnnotation.coordinate.longitude), dropoffLocation: CLLocation(latitude: ViewController.dropOffAnnotation.coordinate.latitude, longitude: ViewController.dropOffAnnotation.coordinate.longitude), completion: { product, response in
                 ViewController.uberPrices = product
                 self.dataRetrived[1] = true
@@ -355,7 +329,7 @@ extension ViewController: MKLocalSearchCompleterDelegate {
             }
         }
         // use addresses, e.g. update model and call `tableView.reloadData()
-        locationResultTableView.reloadData();
+        locationResultTableView.reloadData()
     }
 }
 
