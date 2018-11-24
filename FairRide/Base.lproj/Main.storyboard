@@ -400,13 +400,13 @@
                             <constraint firstItem="KJd-zW-xmE" firstAttribute="top" secondItem="fAl-TU-hEb" secondAttribute="bottom" constant="1.0000000000000284" id="QH0-Ne-V5F"/>
                             <constraint firstAttribute="bottom" secondItem="XTf-fG-UxV" secondAttribute="bottom" id="R2l-tg-rIJ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SNX-x3-KLD" secondAttribute="trailing" constant="20" symbolic="YES" id="R8j-lR-k8L"/>
-                            <constraint firstItem="fAl-TU-hEb" firstAttribute="leading" secondItem="XTf-fG-UxV" secondAttribute="leading" id="g4a-1T-WA2"/>
+                            <constraint firstItem="fAl-TU-hEb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XTf-fG-UxV" secondAttribute="leading" id="g4a-1T-WA2"/>
                             <constraint firstItem="XTf-fG-UxV" firstAttribute="centerX" secondItem="fAl-TU-hEb" secondAttribute="centerX" id="jO9-2J-frL"/>
                             <constraint firstItem="fAl-TU-hEb" firstAttribute="top" secondItem="asT-B2-HQE" secondAttribute="top" id="qUq-DJ-xQj"/>
                             <constraint firstItem="KJd-zW-xmE" firstAttribute="leading" secondItem="XTf-fG-UxV" secondAttribute="leading" id="sZ0-r9-r02"/>
                             <constraint firstItem="KJd-zW-xmE" firstAttribute="trailing" secondItem="XTf-fG-UxV" secondAttribute="trailing" id="uBv-hL-iFw"/>
                             <constraint firstItem="XTf-fG-UxV" firstAttribute="leading" secondItem="TGF-rg-hCo" secondAttribute="leading" id="upG-ov-Ji4"/>
-                            <constraint firstItem="fAl-TU-hEb" firstAttribute="trailing" secondItem="XTf-fG-UxV" secondAttribute="trailing" id="vqR-Iw-qzs"/>
+                            <constraint firstItem="fAl-TU-hEb" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XTf-fG-UxV" secondAttribute="trailing" id="vqR-Iw-qzs"/>
                             <constraint firstItem="SNX-x3-KLD" firstAttribute="leading" secondItem="TGF-rg-hCo" secondAttribute="leadingMargin" id="zgk-xc-kXL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="asT-B2-HQE"/>

@@ -34,7 +34,7 @@ class DetailsViewController: UIViewController{
     
         if(!PriceViewController.uberLyftArray[PriceViewController.buttonIndex].isUber){
             self.view.willRemoveSubview(btnUber)
-            
+    
             let pickup = ViewController.pickUpAnnotation.coordinate
             let destination = ViewController.dropOffAnnotation.coordinate
             btnLyft.configure(rideKind: PriceViewController.uberLyftArray[PriceViewController.buttonIndex].LyftRideKind, pickup: pickup, destination: destination)

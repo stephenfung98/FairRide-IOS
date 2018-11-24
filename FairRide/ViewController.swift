@@ -39,6 +39,7 @@ class ViewController: UIViewController{
     static var lyftTimes: [ETA] = []
     
     var dataRetrived = [false,false,false,false]
+    var keyboardCGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     
     var activeTextView = ""; //top for pickup location, buttom for destination
     static var pickUpAnnotation = MKPointAnnotation()
@@ -47,8 +48,19 @@ class ViewController: UIViewController{
     let uberRidesClient = RidesClient()
     
     @IBAction func compareButton(_ sender: Any) {
-        while !dataRetrived[0] && !dataRetrived[1] && !dataRetrived[2] && !dataRetrived[3]{
+        while !dataRetrived[0]{
         }
+        while !dataRetrived[1]{
+        }
+        while !dataRetrived[2]{
+        }
+        while !dataRetrived[3]{
+        }
+        
+        print(dataRetrived)
+//         dataRetrived = [false,false,false,false]
+        print("done~~~~~~~~~")
+        print(" ")
     }
     
     override func viewDidLoad() {
@@ -71,13 +83,14 @@ class ViewController: UIViewController{
         if(!tableViewSizeSet){
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 locationResultTableView.frame = CGRect(x: locationResultTableView.frame.origin.x, y: locationResultTableView.frame.origin.y, width: locationResultTableView.frame.width, height: locationResultTableView.frame.height - keyboardSize.height)
+                keyboardCGRect = locationResultTableView.frame
             }
         }
+        locationResultTableView.frame = keyboardCGRect
+        
         tableViewSizeSet = true
     }
 }
-
-
 
 extension ViewController: MKMapViewDelegate{
     //MARK: Called by polyLineRenderer
@@ -163,6 +176,7 @@ extension ViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         completer.queryFragment = searchText
         completerDidUpdateResults(completer)
+        dataRetrived = [false,false,false,false]
     }
 }
 
@@ -219,7 +233,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 ViewController.dropOffAnnotation = annotation
                 annotation.title = "Drop off Location"
             }
-            self.dataRetrived = [false,false,false,false]
             self.mapView.addAnnotation(annotation)
             
             //MARK: Handles direction line

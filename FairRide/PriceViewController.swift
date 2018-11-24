@@ -38,8 +38,6 @@ class PriceViewController: UIViewController {
     static var surcharge = 0.0
     static var rideName = ""
     
-    
-    
     @IBOutlet var ridesButton: [UIButton]!
     var count = 0
     
@@ -50,17 +48,14 @@ class PriceViewController: UIViewController {
             button.setTitle("", for: .normal)
             button.setImage(nil, for: .normal)
         }
-        count = 0
         PriceViewController.uberLyftArray.removeAll()
-        
-        
-        //        testLabel.text = String(ViewController.pickUpLocationSet)
+        count = 0;
         distanecTimeLabel.text = "Distance: " + String(ViewController.distance) + " miles" + "\n Expected travel time: " + String(ViewController.travelTime) + " minutes"
         
+        //Mark: Add Uber's to array
         for uber in ViewController.uberTimes{
             closestRideArray.append(closestRide(rideType: uber.name!, minutes: uber.estimate! / 60))
         }
-        
         for uber in ViewController.uberPrices{
             var nearest = 0
             for ride in closestRideArray{
@@ -70,16 +65,14 @@ class PriceViewController: UIViewController {
                 }
             }
             if(uber.lowEstimate != nil){
-                
                 PriceViewController.uberLyftArray.append(uberLyftItem(isUber: true, rideName: uber.name!, minCost: uber.lowEstimate!, maxCost: uber.highEstimate!, closestRide: nearest, surcharge: uber.surgeMultiplier ?? 0.0, LyftRideKind: LyftSDK.RideKind.Standard, UberRideKind: uber.productID!))
             }
         }
         
+        //Mark: Add Lyft's to array
         for lyft in ViewController.lyftTimes{
             closestRideArray.append(closestRide(rideType: lyft.displayName, minutes: lyft.seconds / 60))
         }
-        
-        //        for lyft in ViewController.lyftPrices{
         for index in ViewController.lyftPrices.indices{
             let lyft = ViewController.lyftPrices[index]
             var nearest = 0
@@ -89,7 +82,6 @@ class PriceViewController: UIViewController {
                     break
                 }
             }
-            
             PriceViewController.uberLyftArray.append(uberLyftItem(isUber: false, rideName: lyft.displayName, minCost: Int((lyft.estimate?.minEstimate.amount.description)!)!, maxCost: Int((lyft.estimate?.maxEstimate.amount.description)!)!, closestRide: nearest, surcharge: Double(lyft.primeTimePercentageText) ?? 0, LyftRideKind: lyft.rideKind, UberRideKind: "0"))
         }
         
@@ -97,6 +89,7 @@ class PriceViewController: UIViewController {
 //            lhs.minCost < rhs.minCost
 //        }
         
+        //Add all items to main array
         for item in PriceViewController.uberLyftArray{
             ridesButton[count].setTitle("$\(item.minCost) - \(item.maxCost) \n\n\n\n\n \(item.closestRide) min", for: .normal)
             
@@ -108,6 +101,7 @@ class PriceViewController: UIViewController {
             count+=1
         }
     }
+    
     @IBAction func buttonClicked(_ sender: UIButton) {
         PriceViewController.buttonIndex = 0
         for i in ridesButton.indices{
@@ -116,7 +110,6 @@ class PriceViewController: UIViewController {
                 break
             }
         }
-        print("buttonIndex: " +   String(PriceViewController.buttonIndex))
         
         if(PriceViewController.uberLyftArray.count > PriceViewController.buttonIndex){
             PriceViewController.time = PriceViewController.uberLyftArray[PriceViewController.buttonIndex].closestRide
