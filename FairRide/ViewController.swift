@@ -236,6 +236,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             self.mapView.addAnnotation(annotation)
             
             //MARK: Handles direction line
+            DispatchQueue.main.async{
             let directionRequest = MKDirections.Request()
             directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: ViewController.pickUpAnnotation.coordinate, addressDictionary: nil))
             directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: ViewController.dropOffAnnotation.coordinate, addressDictionary: nil))
@@ -261,6 +262,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 self.mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 40.0, left: 20.0, bottom: 20, right: 20.0), animated: true)
                 ViewController.distance = round((route.distance * 0.00062137) * 10)/10 //convert meters to miles
                 ViewController.travelTime = Int(round(route.expectedTravelTime / 60)) //convert seconds to minutes
+            
             }
             
             //MARK: Calculate the directons for Public Trasportation
@@ -292,7 +294,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 print("walking time: ", Int(round(response.expectedTravelTime / 60)))
             }
             
-            
             self.uberRidesClient.fetchTimeEstimates(pickupLocation: CLLocation(latitude: ViewController.pickUpAnnotation.coordinate.latitude, longitude: ViewController.pickUpAnnotation.coordinate.longitude), completion: { product, response in
                 ViewController.uberTimes = product
                 self.dataRetrived[0] = true
@@ -323,6 +324,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                     ViewController.lyftTimes = []
                 }
             })
+            }
         }
     }
 }
