@@ -14,6 +14,7 @@ import UberCore
 class PriceViewController: UIViewController {
     
     @IBOutlet weak var distanecTimeLabel: UILabel!
+    @IBOutlet weak var buttonScrollView: UIScrollView!
     static var buttonIndex = 0
     static var uberLyftArray = [uberLyftItem]()
     
@@ -37,13 +38,13 @@ class PriceViewController: UIViewController {
     static var time = 0
     static var surcharge = 0.0
     static var rideName = ""
+ 
     
     @IBOutlet var ridesButton: [UIButton]!
     var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         for button in ridesButton{
             button.setTitle("", for: .normal)
             button.setImage(nil, for: .normal)
@@ -92,7 +93,6 @@ class PriceViewController: UIViewController {
         //Add all items to main array
         for item in PriceViewController.uberLyftArray{
             ridesButton[count].setTitle("$\(item.minCost) - \(item.maxCost) \n\n\n\n\n \(item.closestRide) min", for: .normal)
-            
             ridesButton[count].setImage(UIImage(named: item.rideName), for: .normal)
             ridesButton[count].titleEdgeInsets = UIEdgeInsets(top: 7, left: -124.3, bottom: 0, right: 0)
             ridesButton[count].contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
@@ -107,6 +107,7 @@ class PriceViewController: UIViewController {
         for i in ridesButton.indices{
             if ridesButton[i] == sender{
                 PriceViewController.buttonIndex = i
+                print(i)
                 break
             }
         }
@@ -117,6 +118,13 @@ class PriceViewController: UIViewController {
             PriceViewController.surcharge = PriceViewController.uberLyftArray[PriceViewController.buttonIndex].surcharge
             PriceViewController.rideName = PriceViewController.uberLyftArray[PriceViewController.buttonIndex].rideName
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        let rows = CGFloat(ceil(Double(PriceViewController.uberLyftArray.count)/3.0))
+        
+        buttonScrollView.frame = CGRect(x: 0, y: buttonScrollView.frame.origin.y , width: buttonScrollView.frame.width, height: ridesButton[0].frame.width * rows)
+        buttonScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: ridesButton[0].frame.width)
     }
     
 }
