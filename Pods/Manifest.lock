@@ -1,3 +1,26 @@
-PODFILE CHECKSUM: a809da63580fb8a2b4847668e1cb541d3ba631b4
+PODS:
+  - LyftSDK (1.0.6):
+    - LyftSDK/Core (= 1.0.6)
+  - LyftSDK/Core (1.0.6)
+  - UberCore (0.11.0)
+  - UberRides (0.11.0):
+    - UberCore
 
-COCOAPODS: 1.5.3
+DEPENDENCIES:
+  - LyftSDK
+  - UberRides
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - LyftSDK
+    - UberCore
+    - UberRides
+
+SPEC CHECKSUMS:
+  LyftSDK: 17eb5abdb12f72203b68a1eac982823bfadda743
+  UberCore: b72013357bff720a30a1b12669e724750b775ef7
+  UberRides: d39c7c9f612d8f5ebfb69f475a553e1a54c3c4b5
+
+PODFILE CHECKSUM: 152a7b73cb39b9084933f508c65e80e88b30eddb
+
+COCOAPODS: 1.6.0.beta.2

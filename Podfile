@@ -6,5 +6,7 @@ target 'FairRide' do
   use_frameworks!
 
   # Pods for FairRide
+pod 'UberRides'
+pod 'LyftSDK'
 
 end

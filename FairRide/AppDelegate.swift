@@ -11,6 +11,7 @@ import UberCore
 import LyftSDK
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?

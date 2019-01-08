@@ -31,8 +31,8 @@ class ViewController: UIViewController{
     
     static var distance = 0.0
     static var travelTime = 0
-//    static var publicTransportationTravelTime: Int?
-//    static var walkingTravelTime: Int?
+    //    static var publicTransportationTravelTime: Int?
+    //    static var walkingTravelTime: Int?
     static var uberPrices: [PriceEstimate] = []
     static var uberTimes: [TimeEstimate] = []
     static var lyftPrices: [Cost] = []
@@ -48,17 +48,19 @@ class ViewController: UIViewController{
     let uberRidesClient = RidesClient()
     
     @IBAction func compareButton(_ sender: Any) {
-        while !dataRetrived[0]{
+        while !dataRetrived[0] || !dataRetrived[1] || !dataRetrived[2] || !dataRetrived[3]{
+            print(dataRetrived)
+            sleep(1)
         }
-        while !dataRetrived[1]{
-        }
-        while !dataRetrived[2]{
-        }
-        while !dataRetrived[3]{
-        }
+        //        while !dataRetrived[1]{
+        //        }
+        //        while !dataRetrived[2]{
+        //        }
+        //        while !dataRetrived[3]{
+        //        }
         
         print(dataRetrived)
-//         dataRetrived = [false,false,false,false]
+        //         dataRetrived = [false,false,false,false]
         print("done~~~~~~~~~")
         print(" ")
     }
@@ -237,93 +239,111 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             
             //MARK: Handles direction line
             DispatchQueue.main.async{
-            let directionRequest = MKDirections.Request()
-            directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: ViewController.pickUpAnnotation.coordinate, addressDictionary: nil))
-            directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: ViewController.dropOffAnnotation.coordinate, addressDictionary: nil))
-            directionRequest.transportType = .automobile
-            
-            // MARK: Calculate the direction for AUTOMOBILE
-            let directions = MKDirections(request: directionRequest)
-            directions.calculate {
-                (response, error) -> Void in
-                guard let response = response else {
-                    if let error = error {
-                        print("Error: \(error)")
+                let directionRequest = MKDirections.Request()
+                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: ViewController.pickUpAnnotation.coordinate, addressDictionary: nil))
+                directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: ViewController.dropOffAnnotation.coordinate, addressDictionary: nil))
+                directionRequest.transportType = .automobile
+                
+                // MARK: Calculate the direction for AUTOMOBILE
+                let directions = MKDirections(request: directionRequest)
+                directions.calculate {
+                    (response, error) -> Void in
+                    guard let response = response else {
+                        if let error = error {
+                            print("Error: \(error)")
+                        }
+                        return
                     }
-                    return
+                    let route = response.routes[0]
+                    self.mapView.removeOverlay(self.polyLine)
+                    self.polyLine = route.polyline
+                    _ = MKPolylineRenderer(polyline: self.polyLine)
+                    self.mapView.addOverlay(self.polyLine, level: MKOverlayLevel.aboveRoads)
+                    let rect = route.polyline.boundingMapRect.insetBy(dx: 50, dy: 50)
+                    //                self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+                    self.mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 40.0, left: 20.0, bottom: 20, right: 20.0), animated: true)
+                    ViewController.distance = round((route.distance * 0.00062137) * 10)/10 //convert meters to miles
+                    ViewController.travelTime = Int(round(route.expectedTravelTime / 60)) //convert seconds to minutes
+                    
                 }
-                let route = response.routes[0]
-                self.mapView.removeOverlay(self.polyLine)
-                self.polyLine = route.polyline
-                _ = MKPolylineRenderer(polyline: self.polyLine)
-                self.mapView.addOverlay(self.polyLine, level: MKOverlayLevel.aboveRoads)
-                let rect = route.polyline.boundingMapRect.insetBy(dx: 50, dy: 50)
-                //                self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
-                self.mapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 40.0, left: 20.0, bottom: 20, right: 20.0), animated: true)
-                ViewController.distance = round((route.distance * 0.00062137) * 10)/10 //convert meters to miles
-                ViewController.travelTime = Int(round(route.expectedTravelTime / 60)) //convert seconds to minutes
-            
+                
+                //MARK: Calculate the directons for Public Trasportation
+                directionRequest.transportType = .transit
+                let publicTransportationETA = MKDirections(request: directionRequest)
+                publicTransportationETA.calculateETA {
+                    (response, error) -> Void in
+                    guard let response = response else {
+                        if let error = error {
+                            print("Error: \(error)")
+                        }
+                        return
+                    }
+                    //                ViewController.publicTransportationTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
+                    print("public transportation time: ", Int(round(response.expectedTravelTime / 60)))
+                }
+                //MARK: Calculate the directons for Public Trasportation
+                directionRequest.transportType = .walking
+                let walkingETA = MKDirections(request: directionRequest)
+                walkingETA.calculateETA {
+                    (response, error) -> Void in
+                    guard let response = response else {
+                        if let error = error {
+                            print("Error: \(error)")
+                        }
+                        return
+                    }
+                    //                ViewController.walkingTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
+                    print("walking time: ", Int(round(response.expectedTravelTime / 60)))
+                }
             }
             
-            //MARK: Calculate the directons for Public Trasportation
-            directionRequest.transportType = .transit
-            let publicTransportationETA = MKDirections(request: directionRequest)
-            publicTransportationETA.calculateETA {
-                (response, error) -> Void in
-                guard let response = response else {
-                    if let error = error {
-                        print("Error: \(error)")
-                    }
-                    return
-                }
-//                ViewController.publicTransportationTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
-                print("public transportation time: ", Int(round(response.expectedTravelTime / 60)))
-            }
-            //MARK: Calculate the directons for Public Trasportation
-            directionRequest.transportType = .walking
-            let walkingETA = MKDirections(request: directionRequest)
-            walkingETA.calculateETA {
-                (response, error) -> Void in
-                guard let response = response else {
-                    if let error = error {
-                        print("Error: \(error)")
-                    }
-                    return
-                }
-//                ViewController.walkingTravelTime = Int(round(response.expectedTravelTime / 60)) //convert seconds to minutes
-                print("walking time: ", Int(round(response.expectedTravelTime / 60)))
-            }
-            
+            // Background Thread
             self.uberRidesClient.fetchTimeEstimates(pickupLocation: CLLocation(latitude: ViewController.pickUpAnnotation.coordinate.latitude, longitude: ViewController.pickUpAnnotation.coordinate.longitude), completion: { product, response in
                 ViewController.uberTimes = product
                 self.dataRetrived[0] = true
-                
+                if !self.dataRetrived.contains(false){
+                    DispatchQueue.main.sync {
+                        self.performSegue(withIdentifier: "SegueToSceneTwo", sender: nil)
+                    }
+                }
             })
             self.uberRidesClient.fetchPriceEstimates(pickupLocation: CLLocation(latitude: ViewController.pickUpAnnotation.coordinate.latitude, longitude: ViewController.pickUpAnnotation.coordinate.longitude), dropoffLocation: CLLocation(latitude: ViewController.dropOffAnnotation.coordinate.latitude, longitude: ViewController.dropOffAnnotation.coordinate.longitude), completion: { product, response in
                 ViewController.uberPrices = product
                 self.dataRetrived[1] = true
-                
+                if !self.dataRetrived.contains(false){
+                    DispatchQueue.main.sync {
+                        self.performSegue(withIdentifier: "SegueToSceneTwo", sender: nil)
+                    }
+                }
             })
-            LyftAPI.costEstimates(from: ViewController.pickUpAnnotation.coordinate, to: ViewController.dropOffAnnotation.coordinate, rideKind: nil, completion: {
-                response in
+            LyftAPI.costEstimates(from: ViewController.pickUpAnnotation.coordinate, to: ViewController.dropOffAnnotation.coordinate, rideKind: nil){ response in
                 if(response.value != nil){
                     ViewController.lyftPrices = response.value!
-                    self.dataRetrived[2] = true
+                    
                 }
                 else{
                     ViewController.lyftPrices = []
                 }
-            })
-            LyftAPI.ETAs(to: ViewController.pickUpAnnotation.coordinate, completion: {
-                response in
+                self.dataRetrived[2] = true
+                if !self.dataRetrived.contains(false){
+                    DispatchQueue.main.sync {
+                        self.performSegue(withIdentifier: "SegueToSceneTwo", sender: nil)
+                    }
+                }
+            }
+            LyftAPI.ETAs(to: ViewController.pickUpAnnotation.coordinate){ response in
                 if(response.value != nil){
                     ViewController.lyftTimes = response.value!
-                    self.dataRetrived[3] = true
                 }
                 else{
                     ViewController.lyftTimes = []
                 }
-            })
+                self.dataRetrived[3] = true
+                if !self.dataRetrived.contains(false){
+                    DispatchQueue.main.sync {
+                        self.performSegue(withIdentifier: "SegueToSceneTwo", sender: nil)
+                    }
+                }
             }
         }
     }
@@ -347,4 +367,3 @@ extension ViewController: MKLocalSearchCompleterDelegate {
         locationResultTableView.reloadData()
     }
 }
-

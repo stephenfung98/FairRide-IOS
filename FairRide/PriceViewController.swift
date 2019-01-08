@@ -29,6 +29,7 @@ class PriceViewController: UIViewController {
         var UberRideKind: String = ""
     }
     
+    
     var closestRideArray = [closestRide]()
     struct closestRide{
         var rideType = ""
@@ -94,10 +95,16 @@ class PriceViewController: UIViewController {
         for item in PriceViewController.uberLyftArray{
             ridesButton[count].setTitle("$\(item.minCost) - \(item.maxCost) \n\n\n\n\n \(item.closestRide) min", for: .normal)
             ridesButton[count].setImage(UIImage(named: item.rideName), for: .normal)
-            ridesButton[count].titleEdgeInsets = UIEdgeInsets(top: 7, left: -124.3, bottom: 0, right: 0)
+            ridesButton[count].titleEdgeInsets = UIEdgeInsets(top: 0, left: -124.3, bottom: 0, right: 0)
             ridesButton[count].contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
             ridesButton[count].contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
             ridesButton[count].imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+            ridesButton[count].isHidden = false
+            count+=1
+        }
+    
+        while count % 3 != 0{
+            ridesButton[count].isHidden = false
             count+=1
         }
     }
@@ -121,10 +128,9 @@ class PriceViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        let rows = CGFloat(ceil(Double(PriceViewController.uberLyftArray.count)/3.0))
-        
-        buttonScrollView.frame = CGRect(x: 0, y: buttonScrollView.frame.origin.y , width: buttonScrollView.frame.width, height: ridesButton[0].frame.width * rows)
-        buttonScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: ridesButton[0].frame.width)
+//        let rows = CGFloat(ceil(Double(PriceViewController.uberLyftArray.count)/3.0))
+//        buttonScrollView.frame = CGRect(x: 0, y: buttonScrollView.frame.origin.y , width: buttonScrollView.frame.width, height: ridesButton[0].frame.width * rows)
+//        buttonScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: ridesButton[0].frame.width)
     }
     
 }

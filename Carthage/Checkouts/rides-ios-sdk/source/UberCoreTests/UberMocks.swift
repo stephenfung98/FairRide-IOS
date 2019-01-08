@@ -53,7 +53,7 @@ class LoginManagerPartialMock: LoginManager {
         }
     }
 
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any?) -> Bool {
         if let closure = openURLClosure {
             return closure(application, url, sourceApplication, annotation)
         } else if let manager = backingManager {
@@ -66,7 +66,7 @@ class LoginManagerPartialMock: LoginManager {
     @available(iOS 9.0, *)
     public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
-        let annotation = options[.annotation] as Any
+        let annotation = options[.annotation] as Any?
 
         return application(app, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
@@ -88,16 +88,14 @@ class LoginManagerPartialMock: LoginManager {
     }
 }
 
-class NativeAuthenticatorPartialMock: NativeAuthenticator {
-    var consumeResponseClosure: ((URL) -> Bool)?
-    var loginCompletion: AuthenticationCompletionHandler?
+class RidesNativeAuthenticatorPartialStub: BaseAuthenticator {
+    var consumeResponseCompletionValue: (AccessToken?, NSError?)?
     override func consumeResponse(url: URL, completion: AuthenticationCompletionHandler?) {
-        _ = consumeResponseClosure?(url)
-        super.consumeResponse(url: url, completion: loginCompletion)
+        completion?(consumeResponseCompletionValue?.0, consumeResponseCompletionValue?.1)
     }
 }
 
-class NativeAuthenticatorPartialStub: BaseAuthenticator {
+class EatsNativeAuthenticatorPartialStub: BaseAuthenticator {
     var consumeResponseCompletionValue: (AccessToken?, NSError?)?
     override func consumeResponse(url: URL, completion: AuthenticationCompletionHandler?) {
         completion?(consumeResponseCompletionValue?.0, consumeResponseCompletionValue?.1)

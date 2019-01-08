@@ -13,25 +13,19 @@
 		3E48832721196E400096490E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E48832621196E400096490E /* Assets.xcassets */; };
 		3E48832A21196E400096490E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E48832821196E400096490E /* LaunchScreen.storyboard */; };
 		3E50CC84212CBBAC0045EFC3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50CC83212CBBAC0045EFC3 /* DetailsViewController.swift */; };
+		3E690AB221E0D60400C2265E /* Pods_FairRide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0E382CB5A1CF26D932C484 /* Pods_FairRide.framework */; };
+		3E690AB321E0D60400C2265E /* Pods_FairRide.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED0E382CB5A1CF26D932C484 /* Pods_FairRide.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E8461B12124D93500CDAAEB /* PriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8461B02124D93500CDAAEB /* PriceViewController.swift */; };
-		3EA69A8121327E130000A060 /* UberCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA69A7E21327E130000A060 /* UberCore.framework */; };
-		3EA69A8521327E180000A060 /* UberRides.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA69A8221327E180000A060 /* UberRides.framework */; };
-		3EA69A8621327E180000A060 /* UberRides.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA69A8221327E180000A060 /* UberRides.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3EA69A8721327E180000A060 /* LyftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA69A8321327E180000A060 /* LyftSDK.framework */; };
-		3EA69A8821327E180000A060 /* LyftSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA69A8321327E180000A060 /* LyftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3EA69A8A21327E180000A060 /* UberCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA69A8421327E180000A060 /* UberCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3E5520232120FF13000552DF /* Embed Frameworks */ = {
+		3E690AB421E0D60400C2265E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3EA69A8821327E180000A060 /* LyftSDK.framework in Embed Frameworks */,
-				3EA69A8621327E180000A060 /* UberRides.framework in Embed Frameworks */,
-				3EA69A8A21327E180000A060 /* UberCore.framework in Embed Frameworks */,
+				3E690AB321E0D60400C2265E /* Pods_FairRide.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -39,7 +33,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		09C44C84672E27BB41779EB6 /* Pods_FairRide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FairRide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E48831C21196E3F0096490E /* FairRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FairRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E48831F21196E3F0096490E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E48832121196E3F0096490E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,14 +42,9 @@
 		3E48832B21196E400096490E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E50CC83212CBBAC0045EFC3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		3E8461B02124D93500CDAAEB /* PriceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceViewController.swift; sourceTree = "<group>"; };
-		3EA69A7C21327E130000A060 /* LyftSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LyftSDK.framework; path = Carthage/Build/iOS/LyftSDK.framework; sourceTree = "<group>"; };
-		3EA69A7D21327E130000A060 /* UberRides.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UberRides.framework; path = Carthage/Build/iOS/UberRides.framework; sourceTree = "<group>"; };
-		3EA69A7E21327E130000A060 /* UberCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UberCore.framework; path = Carthage/Build/iOS/UberCore.framework; sourceTree = "<group>"; };
-		3EA69A8221327E180000A060 /* UberRides.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UberRides.framework; path = Carthage/Build/iOS/UberRides.framework; sourceTree = "<group>"; };
-		3EA69A8321327E180000A060 /* LyftSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LyftSDK.framework; path = Carthage/Build/iOS/LyftSDK.framework; sourceTree = "<group>"; };
-		3EA69A8421327E180000A060 /* UberCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UberCore.framework; path = Carthage/Build/iOS/UberCore.framework; sourceTree = "<group>"; };
-		81029F973D556A558FEF7EAA /* Pods-FairRide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FairRide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FairRide/Pods-FairRide.debug.xcconfig"; sourceTree = "<group>"; };
-		EEC8D80D3B9FC8F230E4DE67 /* Pods-FairRide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FairRide.release.xcconfig"; path = "Pods/Target Support Files/Pods-FairRide/Pods-FairRide.release.xcconfig"; sourceTree = "<group>"; };
+		772C963ED652BE9114E73328 /* Pods-FairRide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FairRide.release.xcconfig"; path = "Pods/Target Support Files/Pods-FairRide/Pods-FairRide.release.xcconfig"; sourceTree = "<group>"; };
+		D73FC81834B2C7F75644BA76 /* Pods-FairRide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FairRide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FairRide/Pods-FairRide.debug.xcconfig"; sourceTree = "<group>"; };
+		ED0E382CB5A1CF26D932C484 /* Pods_FairRide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FairRide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,25 +52,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EA69A8721327E180000A060 /* LyftSDK.framework in Frameworks */,
-				3EA69A8521327E180000A060 /* UberRides.framework in Frameworks */,
-				3EA69A8121327E130000A060 /* UberCore.framework in Frameworks */,
+				3E690AB221E0D60400C2265E /* Pods_FairRide.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03E918408F919665E4BAAB8E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D73FC81834B2C7F75644BA76 /* Pods-FairRide.debug.xcconfig */,
+				772C963ED652BE9114E73328 /* Pods-FairRide.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3E48831321196E3F0096490E = {
 			isa = PBXGroup;
 			children = (
-				3EA69A8321327E180000A060 /* LyftSDK.framework */,
-				3EA69A8421327E180000A060 /* UberCore.framework */,
-				3EA69A8221327E180000A060 /* UberRides.framework */,
 				3E48831E21196E3F0096490E /* FairRide */,
 				3E48831D21196E3F0096490E /* Products */,
 				3E5520192120F99F000552DF /* Frameworks */,
-				C709FA2B7831909CF4CFA287 /* Pods */,
+				03E918408F919665E4BAAB8E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,21 +104,9 @@
 		3E5520192120F99F000552DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3EA69A7C21327E130000A060 /* LyftSDK.framework */,
-				3EA69A7E21327E130000A060 /* UberCore.framework */,
-				3EA69A7D21327E130000A060 /* UberRides.framework */,
-				09C44C84672E27BB41779EB6 /* Pods_FairRide.framework */,
+				ED0E382CB5A1CF26D932C484 /* Pods_FairRide.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C709FA2B7831909CF4CFA287 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				81029F973D556A558FEF7EAA /* Pods-FairRide.debug.xcconfig */,
-				EEC8D80D3B9FC8F230E4DE67 /* Pods-FairRide.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,13 +116,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E48832E21196E400096490E /* Build configuration list for PBXNativeTarget "FairRide" */;
 			buildPhases = (
-				1D85F48377E4238AA5DBDCB3 /* [CP] Check Pods Manifest.lock */,
+				90EFF367FC73449FFAAEDA38 /* [CP] Check Pods Manifest.lock */,
 				3E48831821196E3F0096490E /* Sources */,
 				3E48831921196E3F0096490E /* Frameworks */,
 				3E48831A21196E3F0096490E /* Resources */,
 				3E55201E2120F9E3000552DF /* Uber Frameworks */,
-				3E5520232120FF13000552DF /* Embed Frameworks */,
 				3E9914FD2127C86A008E6752 /* Lyft frameworks */,
+				3587E26F8759DB3703180CDB /* [CP] Embed Pods Frameworks */,
+				3E690AB421E0D60400C2265E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,22 +181,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D85F48377E4238AA5DBDCB3 /* [CP] Check Pods Manifest.lock */ = {
+		3587E26F8759DB3703180CDB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${PODS_ROOT}/Target Support Files/Pods-FairRide/Pods-FairRide-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/LyftSDK/LyftSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/UberCore/UberCore.framework",
+				"${BUILT_PRODUCTS_DIR}/UberRides/UberRides.framework",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FairRide-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LyftSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UberCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UberRides.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FairRide/Pods-FairRide-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3E55201E2120F9E3000552DF /* Uber Frameworks */ = {
@@ -247,6 +232,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+		90EFF367FC73449FFAAEDA38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FairRide-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -402,7 +405,7 @@
 		};
 		3E48832F21196E400096490E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81029F973D556A558FEF7EAA /* Pods-FairRide.debug.xcconfig */;
+			baseConfigurationReference = D73FC81834B2C7F75644BA76 /* Pods-FairRide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -427,7 +430,7 @@
 		};
 		3E48833021196E400096490E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EEC8D80D3B9FC8F230E4DE67 /* Pods-FairRide.release.xcconfig */;
+			baseConfigurationReference = 772C963ED652BE9114E73328 /* Pods-FairRide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
